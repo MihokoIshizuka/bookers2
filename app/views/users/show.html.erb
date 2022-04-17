@@ -3,6 +3,9 @@
   <%= image_tag @user.get_profile_image %>
   <p>name: <%= @user.name %></p>
   <p>introduction: <%= @user.introduction %></p>
+  <% if @user == current_user %>
+  <p><%= link_to "Edit", edit_user_path(@user) %></p>
+  <% end %>
 </div>
 
 <% @books.each do |book| %>
@@ -12,6 +15,6 @@
    <p>Title: <%= book.title %></p>
   <% end %>
    <p>Opinion: <%= book.body %></p>
-  
+
 </div>
 <% end %>
