@@ -1,3 +1,13 @@
+<% if @user.errors.any? %>
+ <%= @user.errors.count %>errors prohibited this obj from being saved:
+ <ul>
+  <% @user.errors.full_messages.each do |message| %>
+   <li><%= message %></li>
+  <% end %>
+ </ul>
+<% end %>
+
+
 <h2>User Info</h2>
 <%= form_with model: @user do |f| %>
 <label for="inputName">Name</label>
@@ -9,7 +19,6 @@
 
 <%= f.submit "Update User" %>
 
-<%= link_to "Show", book_path(@book.id) %>
-<%= link_to "Back", books_path
+
 
 <% end %>

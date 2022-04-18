@@ -1,20 +1,14 @@
-<div>
-  <h3>User Info</h3>
-  <%= image_tag @user.get_profile_image %>
-  <p>name: <%= @user.name %></p>
-  <p>introduction: <%= @user.introduction %></p>
-  <% if @user == current_user %>
-  <p><%= link_to "Edit", edit_user_path(@user) %></p>
-  <% end %>
-</div>
-
+<%= flash[:notice] %>
 <% @books.each do |book| %>
+
 <div>
   <%= link_to book_path(book.id) do %>
    <%= image_tag @user.get_profile_image %>
    <p>Title: <%= book.title %></p>
   <% end %>
    <p>Opinion: <%= book.body %></p>
-
+   
 </div>
 <% end %>
+
+<%= render 'books/list', user: @user, book: @book %>
