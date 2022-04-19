@@ -11,7 +11,7 @@
   </head>
 
   <body class="d-flex flex-column vh-100">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="/">Bookers</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -19,84 +19,63 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
+
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "#{key}") %>
+      <% end %>
+
+      <% if user_signed_in? %>
       <li class="nav-item active">
-              <%= link_to books_path, class: 'nav-link text-dark' do %>
-              <i class="fas fa-home"></i> Home
-              <% end %>
-            </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+        <%= link_to books_path, class: 'nav-link text-dark' do %>
+          <i class="fas fa-home"></i> Home
+        <% end %>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <%= link_to users_path, class: 'nav-link text-dark' do %>
+        <i class="fas fa-users"></i> Users
+        <% end %>
       </li>
+      <li class="nav-item">
+        <%= link_to books_path, class: 'nav-link text-dark' do %>
+        <i class="fas fa-book-open"></i> Books
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-dark' do %>
+        <i class="fas fa-sign-out"></i> Log out
+        <% end %>
+      </li>
+      <% else %>
+      <li class="nav-item">
+        <%= link_to root_path, class: 'nav-link text-dark' do %>
+        <i class="fas fa-home"></i> Home
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to about_path, class: 'nav-link text-dark' do %>
+        <i class="fa-solid fa-link"></i> About
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to new_user_registration_path, class: 'nav-link text-dark' do %>
+        <i class="fa-solid fa-user-plus"></i> Sign up
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to new_user_session_path, class: 'nav-link text-dark' do %>
+        <i class="fa-solid fa-right-to-bracket"></i> Log in
+        <% end %>
+      </li>
+      <% end %>
     </ul>
+
   </div>
-</nav>
-    <header class="shadow-sm">
-      <nav class="navber navber-expand-lg navber-light">
-        <div class="container">
-          <a class="navber-brand" href="/">
-          <span>Bookers</span>
-          </a>
-          <button class="navber-toggler" type="button" data-toggle="collapse" data-target="#navberNavDropdown" aria-controls="navberNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navber-toggler-icon"></span>
-          </button>
-          <div class="collapse navber-collapse" id="navberNavDropdown">
-            <ul class="navber-nav ml-auto">
-            <% flash.each do |key, value| %>
-             <%= content_tag(:div, value, class: "#{key}") %>
-            <% end %>
+  </nav>
 
-            <% if user_signed_in? %>
-            <li class="nav-item">
-              <%= link_to books_path, class: 'nav-link text-dark' do %>
-              <i class="fas fa-home"></i> Home
-              <% end %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Users", users_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Books", books_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
-            </li>
-            <% else %>
-            <li class="nav-item">
-              <%= link_to "Home", root_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "About", about_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Sign up", new_user_registration_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Log in", new_user_session_path, class: 'nav-link text-dark' %>
-            </li>
-            <% end %>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
 
-    <main class="mb-auto"></main>
-    <%= yield %>
-    </main>
+  <main class="mb-auto"></main>
+   <%= yield %>
+  </main>
 
   </body>
 </html>
