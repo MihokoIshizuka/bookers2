@@ -17,11 +17,12 @@
     <label for="inputBody">Opinion</label><br>
      <%= f.text_area :body %><br>
        
-     <%= f.submit "Update Book" %>
-       
-       
-       
+     <%= f.submit "Update Book" %><br>
+     
+   
     <% end %>
+    <%= link_to "Show", book_path(@book.id) %> |
+    <%= link_to "Back", books_path %>
   </div>
  </div>
 </div>
